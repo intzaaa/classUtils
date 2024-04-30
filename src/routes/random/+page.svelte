@@ -8,6 +8,11 @@
 	let list: string[] = $derived(rawList.split('\n').filter((item) => item.trim() != ''));
 	let randomList: string[] = $state([]);
 	function calculateRandomList(list: Array<any>, number: number) {
+		if (list.length < number) {
+			throw new Error(
+				'The number of people to be randomly selected cannot be greater than the number of people in the list'
+			);
+		}
 		const shadowList = [...list];
 		const randomList = [];
 		for (let i = 1; i <= number; i++) {
