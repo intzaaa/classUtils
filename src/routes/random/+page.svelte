@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import type { TextField } from 'mdui';
 	import { store, retrieve } from '$lib/utils/store';
 	let number = $state(1);
-	let listElement: any;
+	let listElement: TextField;
 	let rawList: string = $state('');
 	let list: string[] = $derived(rawList.split('\n').filter((item) => item.trim() !== ''));
 	let randomList: string[] = $state([]);

@@ -2,10 +2,13 @@
 	import { page } from '$app/stores';
 	import '../app.pcss';
 	import 'mdui/mdui.css';
-	import 'mdui';
 	import '@fontsource/material-icons';
 	import '@fontsource-variable/roboto-flex/full.css';
 	import '@fontsource-variable/noto-sans-sc';
+	import { onMount } from 'svelte';
+	onMount(() => {
+		import('mdui');
+	});
 </script>
 
 <div class="content">
