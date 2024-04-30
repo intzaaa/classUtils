@@ -126,7 +126,7 @@ Wang
 		@apply flex h-fit w-full flex-row flex-wrap content-center items-center justify-center p-2 md:!h-full;
 	}
 	.item {
-		@apply m-1 w-fit grow pb-2 pl-4 pr-4 pt-2 text-center text-lg font-semibold;
+		@apply m-1 w-fit grow pb-2 pl-4 pr-4 pt-2 text-center text-xl;
 	}
 	.card {
 		@apply mb-2 mt-2 flex h-fit  w-full p-4 md:mb-0 md:ml-4 md:mr-4 md:mt-0;
