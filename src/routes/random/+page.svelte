@@ -37,7 +37,7 @@
 
 <svelte:window
 	on:keyup={(e: KeyboardEvent) => {
-	if (e.key === 'Enter') {
+	if (e.key === 'Enter' && document.activeElement !== listElement) {
 		randomList = calculateRandomList(list, number);
 	}
 }}
