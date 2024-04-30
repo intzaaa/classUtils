@@ -5,7 +5,7 @@
 	let number = $state(1);
 	let listElement: TextField;
 	let rawList: string = $state('');
-	let list: string[] = $derived(rawList.split('\n').filter((item) => item.trim() !== ''));
+	let list: string[] = $derived(rawList.split('\n').filter((item) => item.trim() != ''));
 	let randomList: string[] = $state([]);
 	function calculateRandomList(list: Array<any>, number: number) {
 		const shadowList = [...list];
