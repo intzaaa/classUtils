@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import '../app.pcss';
+	import 'large-small-dynamic-viewport-units-polyfill';
 	import 'mdui/mdui.css';
 	import '@fontsource-variable/material-symbols-outlined';
 	import '@fontsource/material-icons';
@@ -32,9 +33,13 @@
 		@apply box-border;
 	}
 	:global(body) {
+		height: 100vh; /* For browsers that don't support CSS variables */
+		height: calc(var(--1dvh, 1vh) * 100); /* This is the "polyfill" */
+		height: 100dvh; /* This is for future browsers that support svh, dvh and lvh viewport units */
+
 		font-family: 'Roboto Flex Variable', 'Roboto Flex', 'Noto Sans SC Variable', 'Noto Sans SC',
 			'Material Symbols Outlined Variable', 'Material Icons', sans-serif;
-		@apply m-0 flex h-dvh w-full flex-col p-0;
+		@apply m-0 flex w-full flex-col p-0;
 	}
 	.content {
 		@apply relative h-full w-full grow overflow-x-hidden overflow-y-scroll p-4;
