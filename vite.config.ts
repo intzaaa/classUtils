@@ -5,5 +5,9 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
+	},
+	build: {
+		sourcemap: true,
+		target: ['chrome99', 'firefox99', 'safari13', 'edge99', 'ios14', 'android99']
 	}
 });
