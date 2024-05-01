@@ -141,7 +141,7 @@ Christopher Taylor
 		@apply flex h-full w-full flex-col items-center justify-start overflow-y-scroll md:flex-row md:justify-center md:overflow-visible md:pb-0;
 	}
 	.list {
-		@apply flex h-fit max-h-[50%] min-h-12 w-full shrink-0 grow-0 flex-row flex-wrap content-start items-stretch justify-start overflow-y-scroll p-2 md:!h-full md:!max-h-full md:!w-[calc(1024px-300px)] md:!content-stretch;
+		@apply flex h-fit max-h-[50%] min-h-4 w-full shrink-0 grow-0 flex-row flex-wrap content-start items-stretch justify-start overflow-y-scroll p-2 md:!h-full md:!max-h-full md:!max-w-[calc(768px-350px)] md:!content-stretch lg:!max-w-[calc(1024px-350px)];
 	}
 	.item {
 		@apply m-2 h-fit min-w-36 grow text-ellipsis p-3 text-lg outline outline-[1.5px] md:h-auto;
@@ -152,7 +152,7 @@ Christopher Taylor
 		@apply flex w-full flex-row items-center overflow-y-hidden overflow-x-scroll;
 	}
 	.card {
-		@apply mb-2 mt-2 flex h-full w-full p-4 md:mb-0 md:ml-4 md:mr-4 md:mt-0;
+		@apply mb-2 mt-2 flex w-full p-4 md:mb-0 md:ml-4 md:mr-4 md:mt-0;
 	}
 	.control {
 		@apply h-96 w-full shrink-0 grow-0 flex-col overflow-y-hidden md:h-full md:max-w-[300px];
