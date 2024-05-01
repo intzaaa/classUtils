@@ -44,6 +44,9 @@
 	.content {
 		@apply relative h-full w-full grow overflow-x-hidden overflow-y-scroll p-4;
 	}
+	.content :global(> main) {
+		@apply pb-2 md:h-full;
+	}
 	mdui-navigation-bar {
 		@apply relative h-fit w-full;
 	}
