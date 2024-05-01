@@ -4,6 +4,7 @@
 	import { store, retrieve } from '$lib/utils/store';
 	let number = $state(1);
 	let listElement: TextField;
+	let listElementHeight: number = $state(0);
 	let rawList: string = $state('');
 	let list: string[] = $derived(rawList.split('\n').filter((item) => item.trim() != ''));
 	let randomList: string[] = $state([]);
@@ -32,11 +33,16 @@
 		console.log('randomList', randomList);
 	});
 	onMount(() => {
+		listElement!.value = retrieve('list') ?? '';
+		rawList = listElement!.value;
+		setInterval(() => {
+			if (listElement) {
+				listElementHeight = listElement?.clientHeight ?? 0;
+			}
+		}, 4);
 		$effect(() => {
 			store('list', rawList);
 		});
-		listElement.value = retrieve('list') ?? '';
-		rawList = listElement.value;
 	});
 </script>
 
@@ -50,27 +56,31 @@
 
 <main>
 	<div class="content">
-		<mdui-card class="list card">
-			{#if randomList.length === 0}
-				Empty
-			{:else}
-				{#each randomList as item, index}
-					<!-- svelte-ignore a11y_click_events_have_key_events -->
-					<!-- svelte-ignore a11y_no_static_element_interactions -->
-					<mdui-card
-						class="item"
-						clickable
-						onclick={() => {
-							randomList.splice(index, 1);
-						}}>{item}</mdui-card
-					>
-				{/each}
-			{/if}
-		</mdui-card>
+		{#key randomList}
+			<mdui-card class="list card">
+				{#if randomList.length === 0}
+					<div class="flex h-full w-full flex-col items-center justify-center text-center">
+						Empty
+					</div>
+				{:else}
+					{#each randomList as item, index}
+						<!-- svelte-ignore a11y_click_events_have_key_events -->
+						<!-- svelte-ignore a11y_no_static_element_interactions -->
+						<mdui-chip selectable class="item"
+							>{item}<span
+								slot="selected-icon"
+								style="font-family: 'Material Symbols Outlined Variable'; font-size: 0.9em"
+								>person_check</span
+							></mdui-chip
+						>
+					{/each}
+				{/if}
+			</mdui-card>
+		{/key}
 		<mdui-card class="control card">
-			<mdui-tooltip content="Enter the number of people to be randomly selected">
+			<mdui-tooltip content="Enter the number of people to be randomly selected" placement="bottom">
 				<mdui-text-field
-					label="Number"
+					label={`${list.length > 0 ? `0 < Number ≤ ${list.length}` : 'Number'}`}
 					type="number"
 					class="number"
 					placeholder={number}
@@ -82,17 +92,16 @@
 					}}
 				></mdui-text-field>
 			</mdui-tooltip>
-			<mdui-tooltip content="Enter the list you want to randomly select from">
+			<mdui-tooltip content="Enter the list you want to randomly select from" placement="bottom">
 				<mdui-text-field
-					autosize
 					min-rows="4"
-					counter
-					enterkeyhint="enter"
+					rows={listElementHeight === 0 ? 6 : Math.floor((listElementHeight - (24 + 8)) / 24)}
 					label="List"
-					placeholder={`John
-Mike
-Doe
-Wang
+					placeholder={`Michael Lee
+Emily Chen
+David Martinez
+Jessica Nguyen
+Christopher Taylor
 ...`}
 					type="text"
 					oninput={(e: InputEvent) => {
@@ -101,6 +110,7 @@ Wang
               rawList = element.value;
             }
           }}
+					class="input"
 					bind:this={listElement}
 				></mdui-text-field>
 			</mdui-tooltip>
@@ -125,22 +135,28 @@ Wang
 		@apply flex h-full w-full flex-col items-center justify-start;
 	}
 	.content {
-		@apply relative flex w-full flex-col md:h-full md:max-w-[768px] md:flex-row;
+		@apply relative flex w-full flex-col md:h-full md:max-w-[1024px] md:flex-row;
 	}
 	.list {
-		@apply flex h-fit w-full flex-row flex-wrap content-center items-center justify-center p-2 md:!h-full;
+		@apply flex h-full w-full flex-row flex-wrap content-center items-stretch justify-between overflow-y-scroll p-2 md:!h-full md:content-stretch;
 	}
 	.item {
-		@apply m-1 w-fit grow pb-2 pl-4 pr-4 pt-2 text-center text-xl;
+		@apply m-2 h-fit min-w-36 grow text-ellipsis p-3 text-center text-lg outline outline-[1.5px] md:h-auto;
+	}
+	.item::part(button) {
+		@apply w-full overflow-y-hidden overflow-x-scroll;
 	}
 	.card {
 		@apply mb-2 mt-2 flex h-fit  w-full p-4 md:mb-0 md:ml-4 md:mr-4 md:mt-0;
 	}
 	.control {
-		@apply w-full flex-col overflow-y-scroll md:h-full;
+		@apply h-96 w-full flex-col overflow-y-hidden md:h-full md:max-w-[300px];
 	}
 	.number {
 		@apply w-full;
+	}
+	.input {
+		@apply h-full w-full overflow-x-hidden overflow-y-scroll;
 	}
 	mdui-fab {
 		@apply fixed bottom-20 right-0 m-4;

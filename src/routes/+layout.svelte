@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import '../app.pcss';
 	import 'mdui/mdui.css';
+	import '@fontsource-variable/material-symbols-outlined';
 	import '@fontsource/material-icons';
 	import '@fontsource-variable/roboto-flex/full.css';
 	import '@fontsource-variable/noto-sans-sc';
@@ -10,6 +11,11 @@
 		import('mdui');
 	});
 </script>
+
+<svelte:head>
+	<title>Class Utils</title>
+	<meta name="description" content="A collection of gadgets for the classroom" />
+</svelte:head>
 
 <div class="content">
 	<slot></slot>
@@ -27,7 +33,7 @@
 	}
 	:global(body) {
 		font-family: 'Roboto Flex Variable', 'Roboto Flex', 'Noto Sans SC Variable', 'Noto Sans SC',
-			sans-serif;
+			'Material Symbols Outlined Variable', 'Material Icons', sans-serif;
 		@apply m-0 flex h-dvh w-full flex-col p-0;
 	}
 	.content {
