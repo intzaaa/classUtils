@@ -3,7 +3,7 @@
 	import type { TextField } from 'mdui';
 	import { store, retrieve } from '$lib/utils/store';
 	let number = $state(1);
-	let listElement: TextField;
+	let listElement: TextField | undefined = $state(undefined);
 	let listElementHeight: number = $state(0);
 	let rawList: string = $state('');
 	let list: string[] = $derived(rawList.split('\n').filter((item) => item.trim() != ''));
@@ -92,7 +92,16 @@
 		<mdui-tooltip content="Enter the list you want to randomly select from" placement="bottom">
 			<mdui-text-field
 				min-rows="4"
-				rows={listElementHeight === 0 ? 6 : Math.floor((listElementHeight - (24 + 8)) / 24)}
+				rows={listElementHeight === 0
+					? 6
+					: Math.floor(
+							(listElementHeight - (24 + 8)) /
+								parseInt(
+									window
+										?.getComputedStyle(listElement!)
+										.lineHeight.replace('px', '')
+								)
+						)}
 				label="List"
 				placeholder={`Michael Lee
 Emily Chen
