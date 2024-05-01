@@ -141,7 +141,8 @@ Christopher Taylor
 		@apply flex h-full w-full flex-col items-center justify-start overflow-y-scroll md:flex-row md:justify-center md:overflow-visible md:pb-0;
 	}
 	.list {
-		@apply flex h-fit max-h-[50%] min-h-4 w-full shrink-0 grow-0 flex-row flex-wrap content-start items-stretch justify-start overflow-y-scroll p-2 md:!h-full md:!max-h-none md:!w-auto md:!max-w-[min(768px,100%)] md:!grow md:!content-stretch;
+		--temp-min-width: calc(100%-350px);
+		@apply flex h-fit max-h-[50%] min-h-4 w-full shrink-0 grow-0 flex-row flex-wrap content-start items-stretch justify-start overflow-y-scroll p-2 md:!h-full md:!max-h-none md:!w-auto md:!max-w-[768px] md:!shrink md:!grow md:!content-stretch;
 	}
 	.item {
 		@apply m-2 h-fit min-w-36 grow text-ellipsis p-3 text-lg outline outline-[1.5px] md:h-auto;
